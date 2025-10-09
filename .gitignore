@@ -1,0 +1,88 @@
+# Conda environments
+.conda/
+conda/
+env/
+venv/
+
+# ==============================
+#  Python / Machine Learning Project
+# ==============================
+
+# --- Python basics ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.joblib
+*.pyproj
+*.idea/
+*.vscode/
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+.env/
+*.env
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- Jupyter / Colab ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*.ipynb_convert/
+.DS_Store
+
+# --- Data files ---
+data/
+datasets/
+*.csv
+*.xlsx
+*.xls
+*.arff
+*.sav
+*.dat
+*.json
+*.zip
+*.gz
+*.rar
+*.h5
+*.parquet
+
+# --- Model files / training outputs ---
+runs/
+models/
+outputs/
+logs/
+checkpoints/
+*.model
+*.bin
+*.h5
+*.onnx
+*.ckpt
+
+# --- System / cache ---
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+ehthumbs.db
+
+# --- Results / Reports ---
+report/
+results/
+*.pdf
+*.html
+*.docx
+*.png
+*.jpg
+*.jpeg
+
+# --- Misc ---
+__MACOSX/
