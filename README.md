@@ -21,44 +21,43 @@ This project builds a binary classifier to predict loan defaults (whether a cust
 - **Target:** V32 — Loan default label (0 = No default, 1 = Default)
 - **Key Features (selected):**
   - V2: Bounced on first EMI, V3: Bounces in last 12 months
-    - V6: EMI amount, V7: Loan Amount, V8: Tenure
-      - V13: Gender, V14: Employment type, V15: Resident type
-        - V18: Number of loans, V28–V31: Advance EMI payments, Tier classification
-        - **Challenge:** Heavy missing data — many columns had up to 34,480 missing values; dropped entirely after assessment.
+  - V6: EMI amount, V7: Loan Amount, V8: Tenure
+  - V13: Gender, V14: Employment type, V15: Resident type
+  - V18: Number of loans, V28–V31: Advance EMI payments, Tier classification
+- **Challenge:** Heavy missing data — many columns had up to 34,480 missing values; dropped entirely after assessment.
 
-        ## 🔹 EDA Highlights
+## 🔹 EDA Highlights
 
-        - Dataset has many "?" values (treated as NaN) and a highly imbalanced target (default ≪ non-default).
-        - Many columns dropped due to high missingness.
-        - ANOVA (f_classif) used for feature selection — outperformed outlier- and correlation-based methods for this imbalanced dataset.
-        - Three feature strategies tested: outlier-based (S1), correlation-based (S2), and ANOVA-based (S3).
+  - Dataset has many "?" values (treated as NaN) and a highly imbalanced target (default ≪ non-default).
+  - Many columns dropped due to high missingness.
+  - ANOVA (f_classif) used for feature selection — outperformed outlier- and correlation-based methods for this imbalanced dataset.
+  - Three feature strategies tested: outlier-based (S1), correlation-based (S2), and ANOVA-based (S3).
 
-        ## 🔹 Modeling
+## 🔹 Modeling
 
-        - **Baseline models (per strategy):** Decision Tree, Random Forest, Logistic Regression, Naive Bayes
-        - **Best boosting model:** CatBoost (gradient boosting on categorical/numerical data)
-        - **Scaling:** StandardScaler applied for Logistic Regression and Naive Bayes
-        - **Evaluation:** AUC-ROC, Precision, Recall, F1-score
+  - **Baseline models (per strategy):** Decision Tree, Random Forest, Logistic Regression, Naive Bayes
+  - **Best boosting model:** CatBoost (gradient boosting on categorical/numerical data)
+  - **Scaling:** StandardScaler applied for Logistic Regression and Naive Bayes
+  - **Evaluation:** AUC-ROC, Precision, Recall, F1-score
 
-        ## 🔹 Results
+## 🔹 Results
 
-        | Model               | Strategy | AUC    | F1     | Precision | Recall |
-        |---------------------|----------|--------|--------|-----------|--------|
-        | Decision Tree       | S1       | 0.8083 | 0.1374 | 0.0763    | 0.6883 |
-        | Decision Tree       | S3       | 0.8153 | 0.1456 | 0.0813    | 0.6941 |
-        | Random Forest       | S1       | 0.8039 | 0.1617 | 0.0927    | 0.6348 |
-        | **CatBoost**        | —        | **0.8418** | — | —      | —      |
+  | Model               | Strategy | AUC    | F1     | Precision | Recall |
+  |---------------------|----------|--------|--------|-----------|--------|
+  | Decision Tree       | S1       | 0.8083 | 0.1374 | 0.0763    | 0.6883 |
+  | Decision Tree       | S3       | 0.8153 | 0.1456 | 0.0813    | 0.6941 |
+  | Random Forest       | S1       | 0.8039 | 0.1617 | 0.0927    | 0.6348 |
+  | **CatBoost**        | —        | **0.8418** | — | —      | —      |
 
-        ✅ **Best model: CatBoost with AUC = 0.8418** — highest discriminative power among all tested models.
+  ✅ **Best model: CatBoost with AUC = 0.8418** — highest discriminative power among all tested models.
 
-        ## 🔹 Conclusion
+## 🔹 Conclusion
 
-        1. Heavy missing data required significant column dropping before modeling.
-        2. ANOVA-based feature selection outperformed outlier and correlation methods for this imbalanced dataset.
-        3. Gradient Boosting (CatBoost) is best suited for this type of tabular, imbalanced data.
-        4. CatBoost achieved AUC = 0.8418, the best across all strategies and models.
-        5. Future work: SMOTE for oversampling, additional feature engineering, hyperparameter tuning.
+1. Heavy missing data required significant column dropping before modeling.
+2. ANOVA-based feature selection outperformed outlier and correlation methods for this imbalanced dataset.
+3. Gradient Boosting (CatBoost) is best suited for this type of tabular, imbalanced data.
+4. CatBoost achieved AUC = 0.8418, the best across all strategies and models.
+5. Future work: SMOTE for oversampling, additional feature engineering, hyperparameter tuning.
 
-        ## 🔹 Executive Summary
-
-        This project predicts two-wheeler loan defaults using the TVS Credit dataset (119,528 records, 32 features). After extensive data cleaning (missing values, "?" handling) and three different feature selection strategies (outlier, correlation, ANOVA), four classifiers were compared alongside gradient boosting. CatBoost emerged as the best model with AUC = 0.8418, outperforming tree-based and linear models. The ANOVA-based feature selection strategy (S3) produced the most reliable features for separating defaulters from non-defaulters in this cost-sensitive setting.
+## 🔹 Executive Summary
+This project predicts two-wheeler loan defaults using the TVS Credit dataset (119,528 records, 32 features). After extensive data cleaning (missing values, "?" handling) and three different feature selection strategies (outlier, correlation, ANOVA), four classifiers were compared alongside gradient boosting. CatBoost emerged as the best model with AUC = 0.8418, outperforming tree-based and linear models. The ANOVA-based feature selection strategy (S3) produced the most reliable features for separating defaulters from non-defaulters in this cost-sensitive setting.
